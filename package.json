@@ -1,0 +1,30 @@
+{
+  "name": "gpx-parser-builder",
+  "version": "0.1.0",
+  "description": "Parse GPX string to JavaScript object and build GPX string from JavaScript object",
+  "main": "./src/gpx.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kf99916/gpx-parser-builder.git"
+  },
+  "keywords": [
+    "gpx",
+    "parser",
+    "builder"
+  ],
+  "author": "Zheng-Xiang Ke",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kf99916/gpx-parser-builder/issues"
+  },
+  "homepage": "https://github.com/kf99916/gpx-parser-builder",
+  "files": [
+    "src"
+  ],
+  "dependencies": {
+    "xml2js": "~0.4"
+  }
+}
