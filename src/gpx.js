@@ -2,10 +2,10 @@ import xml2js from 'xml2js';
 
 const defaultGpxAttr = {
     version: '1.1',
-    creator: 'Hikingbook',
+    creator: 'gpx-parser-builder',
     xmlns: 'http://www.topografix.com/GPX/1/1',
     'xmlns:xsi': 'http://www.w3.org/2001/XMLSchema-instance',
-    'xsi:schemaLocation': 'http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd',
+    'xsi:schemaLocation': 'http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd'
 };
 
 class Gpx {
@@ -24,10 +24,11 @@ class Gpx {
         this.trackSegments = [];
     }
 
-    parse(xmlString) {
+    parse(gpxString) {
         let error;
-        xml2js.parseString(xmlString, (err, xml) => {
+        xml2js.parseString(gpxString, (err, xml) => {
             if (err) {
+                error = err;
                 return;
             }
             if (!xml.gpx) {
