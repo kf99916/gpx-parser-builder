@@ -1,7 +1,7 @@
 {
   "name": "gpx-parser-builder",
   "version": "0.1.0",
-  "description": "Parse GPX string to JavaScript object and build GPX string from JavaScript object",
+  "description": "A simple gpx parser and builder between GPX string and JavaScript object",
   "main": "./src/gpx.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

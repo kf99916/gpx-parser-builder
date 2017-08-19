@@ -1,5 +1,5 @@
 # gpx-parser-builder
-Parse GPX string to JavaScript object and build GPX string from JavaScript object. It is dependent on [node-xml2js](https://github.com/Leonidas-from-XIV/node-xml2js).
+A simple gpx parser and builder between GPX string and JavaScript object. It is dependent on [node-xml2js](https://github.com/Leonidas-from-XIV/node-xml2js).
 
 [![License](https://img.shields.io/github/license/kf99916/gpx-parser-builder.svg)](LICENSE)
 
