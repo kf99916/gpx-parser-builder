@@ -54,11 +54,11 @@ let gpx = new Gpx({version: '1.1'}, {name: 'My first hike'})
 }
 ```
 
-`metadata` the metadata for the gpx.
+`metadata` the metadata for the gpx. The type of `time` in the metadata should be `Date`.
 
-`waypoints` array of waypoints. It is corresponded to `<wpt>`.
+`waypoints` array of waypoints. It is corresponded to `<wpt>`. The type of `time` in a waypoint should be `Date`.
 
-`trackSegments` array of track segments. It is corresponded to `<trkseg>`. Each track segments includes many tracks (`<trkpt>`). As a result, the values should be like as
+`trackSegments` array of track segments. It is corresponded to `<trkseg>`. The type of `time` in a track should be `Date`. Each track segments includes many tracks (`<trkpt>`). As a result, the values should be like as
 ```javascript
 [[{trkpt1}, {trkpt2}, ...], [{trkpt3}, {trkpt4}, ...]]
 ```
@@ -68,6 +68,10 @@ let gpx = new Gpx({version: '1.1'}, {name: 'My first hike'})
 `parse(gpxString)` parse gpx string to Gpx object. return error if parsing failed.
 
 `toString(options)` Gpx object to gpx string. The options is for [node-xml2js](https://github.com/Leonidas-from-XIV/node-xml2js#options-for-the-builder-class).
+
+`addWaypoint(waypoint)` add a waypoint. The method takes care about the waypoint's time.
+
+`addTrack(track, index)` add a track into the `index`-th track segments. The method takes care about the track's time.
 
 ## Save as GPX file in the frontend
 
