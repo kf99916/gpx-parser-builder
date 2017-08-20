@@ -13,7 +13,7 @@ class Gpx {
         this.gpxAttr = defaultGpxAttr;
         if (gpxAttr) {
             for (var key in gpxAttr) {
-                if (gpxAttr.hasOwnProperty(key) && this.gpxAttr.hasOwnProperty(key)) {
+                if (gpxAttr.hasOwnProperty(key)) {
                     this.gpxAttr[key] = gpxAttr[key];
                 }
             }
