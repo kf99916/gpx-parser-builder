@@ -6,7 +6,41 @@ const defaultGpxAttr = {
     xmlns: 'http://www.topografix.com/GPX/1/1',
     'xmlns:xsi': 'http://www.w3.org/2001/XMLSchema-instance',
     'xsi:schemaLocation': 'http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd'
-};
+},
+    handleDate = function (element, handler) {
+        if (element instanceof Object) {
+            if (element.time) {
+                element.time = element.time.map(function (time) {
+                    return handler(time);
+                });
+            }
+        } else if (element instanceof Array) {
+            element.forEach((e) => {
+                handleDate(e, handler);
+            });
+        }
+
+        return element;
+    },
+    parseDate = function (element) {
+        handleDate(element, (time) => {
+            const date = new Date(time);
+            if (isNaN(date.valueOf())) {
+                return time;
+            }
+
+            return date;
+        });
+    },
+    toISOString = function (element) {
+        handleDate(element, (date) => {
+            if (date instanceof Date) {
+                return date.toISOString();
+            }
+
+            return date;
+        });
+    };
 
 class Gpx {
     constructor(gpxAttr, metadata) {
@@ -22,6 +56,26 @@ class Gpx {
         this.metadata = metadata || [];
         this.waypoints = [];
         this.trackSegments = [];
+    }
+
+    addWaypoint(waypoint) {
+        parseDate(waypoint);
+        this.waypoints.push(waypoint);
+    }
+
+    addTrack(track, index) {
+        parseDate(track);
+        index = index || 0;
+        const numTrackSegments = this.trackSegments.length;
+        if (index + 1 >= numTrackSegments) {
+            for (var i = 0; i < index; i++) {
+                if (i >= numTrackSegments) {
+                    this.trackSegments[i] = [];
+                }
+            }
+        }
+
+        this.trackSegments[index].push(track);
     }
 
     parse(gpxString) {
@@ -41,13 +95,16 @@ class Gpx {
             this.gpxAttr = gpx.$ || {};
             if (gpx.metadata) {
                 this.metadata = gpx.metadata;
+                parseDate(this.metadata);
             }
             if (gpx.wpt) {
                 this.waypoints = gpx.wpt;
+                parseDate(this.waypoints);
             }
             if (gpx.trkseg) {
                 this.trackSegments = gpx.trkseg.map((trackSegment) => {
                     if (trackSegment.trkpt) {
+                        parseDate(trackSegment.trkpt);
                         return trackSegment.trkpt;
                     }
 
@@ -63,19 +120,24 @@ class Gpx {
         options = options || {};
         options.rootName = 'gpx';
 
-        const trackSegments = this.trackSegments.map((tracks) => {
+        let gpxObject = {
+            $: this.gpxAttr,
+            metadata: this.metadata,
+            wpt: this.waypoints,
+            trkseg: this.trackSegments
+        };
+
+        toISOString(gpxObject.metadata);
+        toISOString(gpxObject.wpt);
+        gpxObject.trkseg = gpxObject.trkseg.map((tracks) => {
+            toISOString(tracks);
             return {
                 trkpt: tracks
             };
         });
 
         const builder = new xml2js.Builder(options);
-        return builder.buildObject({
-            $: this.gpxAttr,
-            metadata: this.metadata,
-            wpt: this.waypoints,
-            trkseg: trackSegments
-        });
+        return builder.buildObject(gpxObject);
     }
 }
 
