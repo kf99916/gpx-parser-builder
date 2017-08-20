@@ -8,22 +8,25 @@ const defaultGpxAttr = {
     'xsi:schemaLocation': 'http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd'
 },
     handleDate = function (element, handler) {
-        if (element instanceof Object) {
+        if (Array.isArray(element)) {
+            element.forEach((e) => {
+                handleDate(e, handler);
+            });
+        }
+        else if (element instanceof Object) {
             if (element.time) {
                 element.time = element.time.map(function (time) {
                     return handler(time);
                 });
             }
-        } else if (element instanceof Array) {
-            element.forEach((e) => {
-                handleDate(e, handler);
-            });
         }
-
-        return element;
     },
     parseDate = function (element) {
         handleDate(element, (time) => {
+            if (time instanceof Date) {
+                return time;
+            }
+
             const date = new Date(time);
             if (isNaN(date.valueOf())) {
                 return time;
