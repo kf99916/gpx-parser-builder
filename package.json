@@ -1,6 +1,6 @@
 {
   "name": "gpx-parser-builder",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A simple gpx parser and builder between GPX string and JavaScript object",
   "main": "./dist/gpx.js",
   "scripts": {
@@ -24,7 +24,8 @@
   },
   "homepage": "https://github.com/kf99916/gpx-parser-builder",
   "files": [
-    "src"
+    "src",
+    "dist"
   ],
   "devDependencies": {
     "babel-cli": "~6.26",
