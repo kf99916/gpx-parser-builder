@@ -1,7 +1,11 @@
 # gpx-parser-builder
 A simple gpx parser and builder between GPX string and JavaScript object. It is dependent on [node-xml2js](https://github.com/Leonidas-from-XIV/node-xml2js).
 
-[![License](https://img.shields.io/github/license/kf99916/gpx-parser-builder.svg)](LICENSE)
+[![npm](https://img.shields.io/npm/dt/gpx-parser-builder.svg)](https://www.npmjs.com/package/gpx-parser-builder)
+[![GitHub stars](https://img.shields.io/github/stars/kf99916/gpx-parser-builder.svg)](https://github.com/kf99916/gpx-parser-builder/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/kf99916/gpx-parser-builder.svg)](https://github.com/kf99916/gpx-parser-builder/network)
+[![npm](https://img.shields.io/npm/v/gpx-parser-builder.svg)](https://www.npmjs.com/package/gpx-parser-builder)
+[![GitHub license](https://img.shields.io/github/license/kf99916/gpx-parser-builder.svg)](https://github.com/kf99916/gpx-parser-builder/blob/master/LICENSE)
 
 ## Requirements
 
