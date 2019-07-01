@@ -79,6 +79,7 @@ function () {
     this.metadata = metadata || [];
     this.waypoints = [];
     this.trackSegments = [];
+    this.routes = [];
   }
 
   _createClass(Gpx, [{
@@ -103,6 +104,11 @@ function () {
       }
 
       this.trackSegments[index].push(track);
+    }
+  }, {
+    key: "addRoute",
+    value: function addRoute(route) {
+      this.routes.push(route);
     }
   }, {
     key: "parse",
@@ -158,7 +164,8 @@ function () {
         $: this.gpxAttr,
         metadata: this.metadata,
         wpt: this.waypoints,
-        trkseg: this.trackSegments
+        trkseg: this.trackSegments,
+        rte: this.routes
       };
       toISOString(gpxObject.metadata);
       toISOString(gpxObject.wpt);

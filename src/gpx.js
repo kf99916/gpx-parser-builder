@@ -59,6 +59,7 @@ class Gpx {
     this.metadata = metadata || [];
     this.waypoints = [];
     this.trackSegments = [];
+    this.routes = [];
   }
 
   addWaypoint(waypoint) {
@@ -79,6 +80,10 @@ class Gpx {
     }
 
     this.trackSegments[index].push(track);
+  }
+
+  addRoute(route) {
+    this.routes.push(route);
   }
 
   parse(gpxString) {
@@ -128,6 +133,7 @@ class Gpx {
       metadata: this.metadata,
       wpt: this.waypoints,
       trkseg: this.trackSegments,
+      rte: this.routes
     };
 
     toISOString(gpxObject.metadata);
