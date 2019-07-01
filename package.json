@@ -31,6 +31,6 @@
     "mocha": "~6.1"
   },
   "dependencies": {
-    "xml2js": "~0.4"
+    "isomorphic-xml2js": "~0.1"
   }
 }

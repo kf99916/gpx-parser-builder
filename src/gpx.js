@@ -1,4 +1,4 @@
-import xml2js from 'xml2js';
+import xml2js from 'isomorphic-xml2js';
 import Metadata from './metadata';
 import Waypoint from './waypoint';
 import Route from './route';
