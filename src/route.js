@@ -11,8 +11,17 @@ export default class Route {
     this.type = object.type;
     this.extensions = object.extensions;
     if (object.link) {
+      if (!Array.isArray(object.link)) {
+        this.link = [object.link];
+      }
       this.link = object.link.map(l => new Link(l));
     }
-    this.rtept = object.rtept.map(pt => new Waypoint(pt));
+
+    if (object.rtept) {
+      if (!Array.isArray(object.rtept)) {
+        this.rtept = [object.rtept];
+      }
+      this.rtept = object.rtept.map(pt => new Waypoint(pt));
+    }
   }
 }
