@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" creator="Hikingbook" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.topografix.com/GPX/1/1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd https://hikingbook.net/xmlschemas/1/1 https://hikingbook.net/xmlschemas/1/1/gpxhb.xsd" xmlns:gpxhb="https://hikingbook.net/xmlschemas/1/1">
+  <metadata>
+    <name>2018.12.02 - 2018.12.03 玉山前二峰：主峰與前峰</name>
+    <desc>Day 1：塔塔加登山口 〉孟祿亭 〉前峰叉路 〉玉山前峰 〉前峰叉路 〉白木林涼亭 〉大峭壁 〉排雲山莊
+Day 2：排雲山莊 〉圓峰山屋叉路 〉風口 〉北峰叉路 〉玉山主峰 〉沿原路回至排雲山莊 〉沿原路回至塔塔加登山口</desc>
+    <author>
+      <name>Hikingbook</name>
+      <link href="https://hikingbook.net">
+        <text>Hikingbook</text>
+      </link>
+    </author>
+    <link href="https://hikingbook.net/hikes/91490sNATjSpazduVtd8UJCw">
+      <text>Hikingbook</text>
+    </link>
+    <time>2019-07-01T19:10:36.904382541+08:00</time>
+    <keywords>Hikingbook,玉山,主峰,前峰,排雲山莊</keywords>
+    <extensions>
+      <gpxhb:postscript>感謝老天賜予美好天氣，不過實在是熱到快中暑 😂</gpxhb:postscript>
+    </extensions>
+  </metadata>
+  <wpt lat="23.481704933904467" lon="120.88689418025692">
+    <ele>2616.353759765625</ele>
+    <time>2018-12-02T00:48:11Z</time>
+    <name>00 排雲管理站</name>
+    <cmt>2018-12-02T00:48:11Z</cmt>
+    <desc>00 排雲管理站</desc>
+    <src>Hikingbook</src>
+    <link href="https://hikingbook.net/hikes/91490sNATjSpazduVtd8UJCw">
+      <text>Hikingbook</text>
+    </link>
+    <extensions>
+      <gpxhb:weather>晴</gpxhb:weather>
+      <gpxhb:speed>-1.000000</gpxhb:speed>
+      <gpxhb:course>-1.000000</gpxhb:course>
+    </extensions>
+  </wpt>
+  <wpt lat="23.47577251030456" lon="120.90013867255384">
+    <ele>2610.6653442382812</ele>
+    <time>2018-12-02T01:07:05Z</time>
+    <name>01 玉山主峰登山口</name>
+    <cmt>2018-12-02T01:07:05Z</cmt>
+    <desc>01 玉山主峰登山口</desc>
+    <src>Hikingbook</src>
+    <link href="https://hikingbook.net/hikes/91490sNATjSpazduVtd8UJCw">
+      <text>Hikingbook</text>
+    </link>
+    <extensions>
+      <gpxhb:weather>晴</gpxhb:weather>
+      <gpxhb:speed>0.000000</gpxhb:speed>
+      <gpxhb:course>0.000000</gpxhb:course>
+    </extensions>
+  </wpt>
+  <wpt lat="23.472183421276018" lon="120.91049619030292">
+    <ele>2797.4966430664062</ele>
+    <time>2018-12-02T01:45:33Z</time>
+    <name>02 孟祿亭休息</name>
+    <cmt>2018-12-02T01:45:33Z</cmt>
+    <desc>02 孟祿亭休息</desc>
+    <src>Hikingbook</src>
+    <link href="https://hikingbook.net/hikes/91490sNATjSpazduVtd8UJCw">
+      <text>Hikingbook</text>
+    </link>
+    <extensions>
+      <gpxhb:weather>晴</gpxhb:weather>
+      <gpxhb:speed>0.000000</gpxhb:speed>
+      <gpxhb:course>82.968750</gpxhb:course>
+    </extensions>
+  </wpt>
+  <wpt lat="23.470450798071425" lon="120.91805624786849">
+    <ele>2862.8103637695312</ele>
+    <time>2018-12-02T02:16:19Z</time>
+    <name>03 前峰叉路，取左直上前峰</name>
+    <cmt>2018-12-02T02:16:19Z</cmt>
+    <desc>03 前峰叉路，取左直上前峰</desc>
+    <src>Hikingbook</src>
+    <link href="https://hikingbook.net/hikes/91490sNATjSpazduVtd8UJCw">
+      <text>Hikingbook</text>
+    </link>
+    <extensions>
+      <gpxhb:weather>晴</gpxhb:weather>
+      <gpxhb:speed>0.320000</gpxhb:speed>
+      <gpxhb:course>191.953125</gpxhb:course>
+    </extensions>
+  </wpt>
+  <wpt lat="23.4727748483638" lon="120.9175546747827">
+    <ele>2992.3372192382812</ele>
+    <time>2018-12-02T02:45:02Z</time>
+    <name>04 亂石區</name>
+    <cmt>2018-12-02T02:45:02Z</cmt>
+    <desc>04 亂石區</desc>
+    <src>Hikingbook</src>
+    <link href="https://hikingbook.net/hikes/91490sNATjSpazduVtd8UJCw">
+      <text>Hikingbook</text>
+    </link>
+    <extensions>
+      <gpxhb:weather>晴</gpxhb:weather>
+      <gpxhb:speed>0.000000</gpxhb:speed>
+      <gpxhb:course>112.851562</gpxhb:course>
+    </extensions>
+  </wpt>
+  <wpt lat="23.474449175431833" lon="120.91780420404012">
+    <ele>3125.0591430664062</ele>
+    <time>2018-12-02T03:12:57Z</time>
+    <name>05 隊員小不舒服，休息</name>
+    <cmt>2018-12-02T03:12:57Z</cmt>
+    <desc>05 隊員小不舒服，休息</desc>
+    <src>Hikingbook</src>
+    <link href="https://hikingbook.net/hikes/91490sNATjSpazduVtd8UJCw">
+      <text>Hikingbook</text>
+    </link>
+    <extensions>
+      <gpxhb:weather>晴</gpxhb:weather>
+      <gpxhb:speed>0.210000</gpxhb:speed>
+      <gpxhb:course>94.218750</gpxhb:course>
+    </extensions>
+  </wpt>
+  <wpt lat="23.47443848850529" lon="120.91779045771892">
+    <ele>3128.0923461914062</ele>
+    <time>2018-12-02T03:16:25Z</time>
+    <name>06 1 km</name>
+    <cmt>2018-12-02T03:16:25Z</cmt>
+    <desc>06 1 km</desc>
+    <src>Hikingbook</src>
+    <link href="https://hikingbook.net/hikes/91490sNATjSpazduVtd8UJCw">
+      <text>Hikingbook</text>
+    </link>
+    <extensions>
+      <gpxhb:weather>晴</gpxhb:weather>
+      <gpxhb:speed>0.000000</gpxhb:speed>
+      <gpxhb:course>177.539062</gpxhb:course>
+    </extensions>
+  </wpt>
+  <trk>
+    <name>2018.12.02 - 2018.12.03 玉山前二峰：主峰與前峰</name>
+    <cmt>Day 1：塔塔加登山口 〉孟祿亭 〉前峰叉路 〉玉山前峰 〉前峰叉路 〉白木林涼亭 〉大峭壁 〉排雲山莊
+Day 2：排雲山莊 〉圓峰山屋叉路 〉風口 〉北峰叉路 〉玉山主峰 〉沿原路回至排雲山莊 〉沿原路回至塔塔加登山口</cmt>
+    <desc>Day 1：塔塔加登山口 〉孟祿亭 〉前峰叉路 〉玉山前峰 〉前峰叉路 〉白木林涼亭 〉大峭壁 〉排雲山莊
+Day 2：排雲山莊 〉圓峰山屋叉路 〉風口 〉北峰叉路 〉玉山主峰 〉沿原路回至排雲山莊 〉沿原路回至塔塔加登山口</desc>
+    <src>Hikingbook</src>
+    <link href="https://hikingbook.net/hikes/91490sNATjSpazduVtd8UJCw">
+      <text>Hikingbook</text>
+    </link>
+    <trkseg>
+      <trkpt lat="23.466195683016874" lon="120.93243699532088">
+        <ele>3113.1992797851562</ele>
+        <time>2018-12-02T07:22:06Z</time>
+        <src>Hikingbook</src>
+        <extensions>
+          <gpxhb:speed>0.980000</gpxhb:speed>
+          <gpxhb:course>132.890625</gpxhb:course>
+        </extensions>
+      </trkpt>
+      <trkpt lat="23.466936559438206" lon="120.93265945103106">
+        <ele>3109.8704223632812</ele>
+        <time>2018-12-02T07:23:54Z</time>
+        <src>Hikingbook</src>
+        <extensions>
+          <gpxhb:speed>1.030000</gpxhb:speed>
+          <gpxhb:course>16.875000</gpxhb:course>
+        </extensions>
+      </trkpt>
+      <trkpt lat="23.46723097378711" lon="120.93352354142901">
+        <ele>3123.3298950195312</ele>
+        <time>2018-12-02T07:26:47Z</time>
+        <src>Hikingbook</src>
+        <extensions>
+          <gpxhb:speed>0.880000</gpxhb:speed>
+          <gpxhb:course>103.359375</gpxhb:course>
+        </extensions>
+      </trkpt>
+      <trkpt lat="23.467356283239525" lon="120.93376779008743">
+        <ele>3134.1856079101562</ele>
+        <time>2018-12-02T07:27:38Z</time>
+        <src>Hikingbook</src>
+        <extensions>
+          <gpxhb:speed>0.420000</gpxhb:speed>
+          <gpxhb:course>93.867188</gpxhb:course>
+        </extensions>
+      </trkpt>
+      <trkpt lat="23.46751143226723" lon="120.93387415643868">
+        <ele>3142.2520141601562</ele>
+        <time>2018-12-02T07:28:38Z</time>
+        <src>Hikingbook</src>
+        <extensions>
+          <gpxhb:speed>0.170000</gpxhb:speed>
+          <gpxhb:course>43.242188</gpxhb:course>
+        </extensions>
+      </trkpt>
+      <trkpt lat="23.467505606844526" lon="120.93387356970545">
+        <ele>3145.4353637695312</ele>
+        <time>2018-12-02T07:29:02Z</time>
+        <src>Hikingbook</src>
+        <extensions>
+          <gpxhb:speed>0.000000</gpxhb:speed>
+          <gpxhb:course>133.945312</gpxhb:course>
+        </extensions>
+      </trkpt>
+      <trkpt lat="23.467383817791443" lon="120.93392738152382">
+        <ele>3141.2898559570312</ele>
+        <time>2018-12-02T07:29:44Z</time>
+        <src>Hikingbook</src>
+        <extensions>
+          <gpxhb:speed>0.730000</gpxhb:speed>
+          <gpxhb:course>131.132812</gpxhb:course>
+        </extensions>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <rte>
+    <name>Kf's Route</name>
+    <rtept lon="9.860624216140083" lat="54.9328621088893">
+      <ele>0.0</ele>
+      <name>Position 1</name>
+    </rtept>
+    <rtept lon="9.86092208681491" lat="54.93293237320851">
+      <ele>0.0</ele>
+      <name>Position 2</name>
+    </rtept>
+    <rtept lon="9.86187816543752" lat="54.93327743521187">
+      <ele>0.0</ele>
+      <name>Position 3</name>
+    </rtept>
+    <rtept lon="9.862439849679859" lat="54.93342326167919">
+      <ele>0.0</ele>
+      <name>Position 4</name>
+    </rtept>
+  </rte>
+</gpx>

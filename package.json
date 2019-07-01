@@ -2,12 +2,9 @@
   "name": "gpx-parser-builder",
   "version": "0.2.2",
   "description": "A simple gpx parser and builder between GPX string and JavaScript object",
-  "main": "./dist/gpx.js",
+  "main": "./src/gpx.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build:dev": "node_modules/.bin/babel src/gpx.js -o dist/gpx.js",
-    "build:prod": "node_modules/.bin/babel src/gpx.js -o dist/gpx.min.js --minified",
-    "build": "run-p build:*"
+    "test": "mocha --require @babel/register test/**/*.js"
   },
   "repository": {
     "type": "git",
@@ -25,14 +22,13 @@
   },
   "homepage": "https://github.com/kf99916/gpx-parser-builder",
   "files": [
-    "src",
-    "dist"
+    "src"
   ],
   "devDependencies": {
     "@babel/core": "~7.4",
-    "@babel/cli": "~7.4",
     "@babel/preset-env": "~7.4",
-    "npm-run-all": "~4.1"
+    "@babel/register": "~7.4",
+    "mocha": "~6.1"
   },
   "dependencies": {
     "xml2js": "~0.4"

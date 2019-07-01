@@ -1,153 +1,83 @@
 import xml2js from 'xml2js';
+import Metadata from './metadata';
+import Waypoint from './waypoint';
+import Route from './route';
+import Track from './track';
+import './date';
 
-const defaultGpxAttr = {
-    version: '1.1',
-    creator: 'gpx-parser-builder',
-    xmlns: 'http://www.topografix.com/GPX/1/1',
-    'xmlns:xsi': 'http://www.w3.org/2001/XMLSchema-instance',
-    'xsi:schemaLocation':
-      'http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd',
-  },
-  handleDate = function(element, handler) {
-    if (Array.isArray(element)) {
-      element.forEach(e => {
-        handleDate(e, handler);
-      });
-    } else if (element instanceof Object) {
-      if (element.time) {
-        element.time = element.time.map(function(time) {
-          return handler(time);
-        });
-      }
+const defaultAttributes = {
+  version: '1.1',
+  creator: 'gpx-parser-builder',
+  xmlns: 'http://www.topografix.com/GPX/1/1',
+  'xmlns:xsi': 'http://www.w3.org/2001/XMLSchema-instance',
+  'xsi:schemaLocation':
+      'http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd'
+}
+
+export default class GPX {
+  constructor(object) {
+    this.attributes = Object.assign({}, defaultAttributes, object.attributes || {});
+    this.extensions = object.extensions;
+    if (object.metadata) {
+      this.metadata = new Metadata(object.metadata);
     }
-  },
-  parseDate = function(element) {
-    handleDate(element, time => {
-      if (time instanceof Date) {
-        return time;
+    if (object.wpt) {
+      if (!Array.isArray(object.wpt)) {
+        object.wpt = [object.wpt];
       }
-
-      const date = new Date(time);
-      if (isNaN(date.valueOf())) {
-        return time;
-      }
-
-      return date;
-    });
-  },
-  toISOString = function(element) {
-    handleDate(element, date => {
-      if (date instanceof Date) {
-        return date.toISOString();
-      }
-
-      return date;
-    });
-  };
-
-class Gpx {
-  constructor(gpxAttr, metadata) {
-    this.gpxAttr = defaultGpxAttr;
-    if (gpxAttr) {
-      for (var key in gpxAttr) {
-        if (gpxAttr.hasOwnProperty(key)) {
-          this.gpxAttr[key] = gpxAttr[key];
-        }
-      }
+      this.wpt = object.wpt.map(wpt => new Waypoint(wpt));
     }
-
-    this.metadata = metadata || [];
-    this.waypoints = [];
-    this.trackSegments = [];
-    this.routes = [];
-  }
-
-  addWaypoint(waypoint) {
-    parseDate(waypoint);
-    this.waypoints.push(waypoint);
-  }
-
-  addTrack(track, index) {
-    parseDate(track);
-    index = index || 0;
-    const numTrackSegments = this.trackSegments.length;
-    if (index + 1 >= numTrackSegments) {
-      for (var i = 0; i < index; i++) {
-        if (i >= numTrackSegments) {
-          this.trackSegments[i] = [];
-        }
+    if (object.rte) {
+      if (!Array.isArray(object.rte)) {
+        object.rte = [object.rte];
       }
+      this.rte = object.rte.map(rte => new Route(rte));
     }
-
-    this.trackSegments[index].push(track);
+    if (object.trk) {
+      if (!Array.isArray(object.trk)) {
+        object.trk = [object.trk];
+      }
+      this.trk = object.trk.map(trk => new Track(trk));
+    }
   }
-
-  addRoute(route) {
-    this.routes.push(route);
-  }
-
-  parse(gpxString) {
-    let error;
-    xml2js.parseString(gpxString, (err, xml) => {
+  
+  static parse(gpxString) {
+    let gpx;
+    xml2js.parseString(gpxString, {
+      explicitArray: false
+    }, (err, xml) => {
       if (err) {
-        error = err;
         return;
       }
       if (!xml.gpx) {
-        error = new TypeError('Invalid gpx');
         return;
       }
 
-      let gpx = xml.gpx;
-
-      this.gpxAttr = gpx.$ || {};
-      if (gpx.metadata) {
-        this.metadata = gpx.metadata;
-        parseDate(this.metadata);
-      }
-      if (gpx.wpt) {
-        this.waypoints = gpx.wpt;
-        parseDate(this.waypoints);
-      }
-      if (gpx.trkseg) {
-        this.trackSegments = gpx.trkseg.map(trackSegment => {
-          if (trackSegment.trkpt) {
-            parseDate(trackSegment.trkpt);
-            return trackSegment.trkpt;
-          }
-
-          return;
-        });
-      }
+      gpx = new GPX({
+        attributes: xml.gpx.$,
+        metadata: xml.gpx.metadata,
+        wpt: xml.gpx.wpt,
+        rte: xml.gpx.rte,
+        trk: xml.gpx.trk
+      });
     });
 
-    return error;
+    return gpx;
   }
 
   toString(options) {
     options = options || {};
     options.rootName = 'gpx';
 
-    let gpxObject = {
-      $: this.gpxAttr,
+    const gpx = {
+      $: this.attributes,
       metadata: this.metadata,
-      wpt: this.waypoints,
-      trkseg: this.trackSegments,
-      rte: this.routes
+      wpt: this.wpt,
+      rte: this.rte,
+      trk: this.trk
     };
 
-    toISOString(gpxObject.metadata);
-    toISOString(gpxObject.wpt);
-    gpxObject.trkseg = gpxObject.trkseg.map(tracks => {
-      toISOString(tracks);
-      return {
-        trkpt: tracks,
-      };
-    });
-
     const builder = new xml2js.Builder(options);
-    return builder.buildObject(gpxObject);
+    return builder.buildObject(gpx);
   }
 }
-
-export default Gpx;
