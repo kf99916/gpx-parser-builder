@@ -11,9 +11,9 @@ describe('GPX', function() {
         assert.notEqual(gpx, null);
 
         // Attributes
-        assert.equal(gpx.attributes.version, '1.1');
-        assert.equal(gpx.attributes.creator, 'Hikingbook');
-        assert.equal(gpx.attributes.xmlns, 'http://www.topografix.com/GPX/1/1');
+        assert.equal(gpx.$.version, '1.1');
+        assert.equal(gpx.$.creator, 'Hikingbook');
+        assert.equal(gpx.$.xmlns, 'http://www.topografix.com/GPX/1/1');
 
         // Metadata
         assert.notEqual(gpx.metadata, null);
@@ -38,6 +38,19 @@ describe('GPX', function() {
 
         done();
      });
+    });
+  })
+
+  describe('Build', function() {
+    it('Build a gpx string', function(done) {
+      const gpx = new GPX({
+        wpt: [{$: {
+          lat: 22.33,
+          lon: 120.33
+        }}]
+      });
+      console.log(gpx.toString());
+      done();
     });
   })
 });

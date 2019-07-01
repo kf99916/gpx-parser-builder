@@ -3,7 +3,7 @@ import Metadata from './metadata';
 import Waypoint from './waypoint';
 import Route from './route';
 import Track from './track';
-import './date';
+import {removeEmpty, allDatesToISOString} from './utils';
 
 const defaultAttributes = {
   version: '1.1',
@@ -16,8 +16,9 @@ const defaultAttributes = {
 
 export default class GPX {
   constructor(object) {
-    this.attributes = Object.assign({}, defaultAttributes, object.attributes || {});
+    this.$ = Object.assign({}, defaultAttributes, object.$ || object.attributes || {});
     this.extensions = object.extensions;
+
     if (object.metadata) {
       this.metadata = new Metadata(object.metadata);
     }
@@ -39,6 +40,8 @@ export default class GPX {
       }
       this.trk = object.trk.map(trk => new Track(trk));
     }
+
+    removeEmpty(this);
   }
   
   static parse(gpxString) {
@@ -69,15 +72,8 @@ export default class GPX {
     options = options || {};
     options.rootName = 'gpx';
 
-    const gpx = {
-      $: this.attributes,
-      metadata: this.metadata,
-      wpt: this.wpt,
-      rte: this.rte,
-      trk: this.trk
-    };
-
-    const builder = new xml2js.Builder(options);
+    const builder = new xml2js.Builder(options), gpx = new GPX(this);
+    allDatesToISOString(gpx);
     return builder.buildObject(gpx);
   }
 }
