@@ -1,5 +1,5 @@
 # gpx-parser-builder
-A simple gpx parser and builder between GPX string and JavaScript object. It is dependent on [node-xml2js](https://github.com/Leonidas-from-XIV/node-xml2js).
+A simple gpx parser and builder between GPX string and JavaScript object. It is dependent on [isomorphic-xml2js](https://github.com/RikkiGibson/isomorphic-xml2js).
 
 [![npm](https://img.shields.io/npm/dt/gpx-parser-builder.svg)](https://www.npmjs.com/package/gpx-parser-builder)
 [![GitHub stars](https://img.shields.io/github/stars/kf99916/gpx-parser-builder.svg)](https://github.com/kf99916/gpx-parser-builder/stargazers)
@@ -17,37 +17,41 @@ gpx-parser-builder is written with ECMAScript 6. You can leverage [Babel](https:
 npm install gpx-parser-builder --save
 ```
 
+## Version
+
+v1.0.0+ is a breaking change for v0.2.2-. v1.0.0+ fully supports gpx files including waypoints, routes, and tracks. Every gpx type is 1-1 corresponding to a JavaScript class.
+
 ## Usage
 
 ```javascript
-import Gpx from 'gpx-parser-builder';
-
-let gpx = new Gpx();
+import GPX from 'gpx-parser-builder';
 
 // Parse gpx
-gpx.parse('<?xml version="1.0" encoding="utf-8" standalone="no"?> <gpx xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.1" xmlns="http://www.topografix.com/GPX/1/1" creator="Hikingbook" xmlns:gpxhb="https://hikingbook.net/xmlschemas/1/0" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd https://hikingbook.net/xmlschemas/1/0 https://hikingbook.net/xmlschemas/1/0/gpxhb.xsd"> <metadata> <name>2017.4.2 - 2017.4.4 Shuiyang Forest</name> <desc>Hikingbook makes hiking safer. Record your hikes completely and get the information of the hiking routes through the hiking records.</desc> <author> <name>Kfs Phone by Hikingbook</name> <link href="https://hikingbook.net/"> <text>Hikingbook</text> </link> </author> <link href="https://hikingbook.net/"> <text>Hikingbook</text> </link> <time>2017-04-18T21:28:36+08:00</time> <keywords>Hikingbook</keywords> </metadata> <wpt lat="23.6344071105343" lon="120.791769968458"> <ele>1660.7646484375</ele> <time>2017-04-02T15:42:03+08:00</time> <name>01 SunLinkSea Hotel</name> <cmt>2017-04-02T15:42:03+08:00</cmt> <desc>01 SunLinkSea Hotel</desc> <src>Hikingbook</src> <link href="https://hikingbook.net/"> <text>Hikingbook</text> </link> <extensions> <gpxhb:weather>Clear</gpxhb:weather> </extensions> </wpt> <trkseg> <trkpt lat="25.136927" lon="121.602847"> <ele>561</ele> <time>2017-03-27T22:38:18.481Z</time> </trkpt> <trkpt lat="25.136927" lon="121.602847"> <ele>561</ele> <time>2017-03-27T22:38:18.481Z</time> </trkpt> <trkpt lat="25.136927" lon="121.602847"> <ele>561</ele> <time>2017-03-27T22:38:18.481Z</time> </trkpt> </trkseg> <trkseg> <trkpt lat="25.136927" lon="121.602847"> <ele>561</ele> <time>2017-03-27T22:38:18.481Z</time> </trkpt> <trkpt lat="25.136927" lon="121.602847"> <ele>561</ele> <time>2017-03-27T22:38:18.481Z</time> </trkpt> <trkpt lat="25.136927" lon="121.602847"> <ele>561</ele> <time>2017-03-27T22:38:18.481Z</time> </trkpt> </trkseg> </gpx>');
+const gpx = GPX.parse('GPX_STRING');
 
 window.console.dir(gpx.metadata);
-window.console.dir(gpx.waypoints);
-window.console.dir(gpx.trackSegments);
+window.console.dir(gpx.wpt);
+window.console.dir(gpx.trk);
 
 // Build gpx
 window.console.log(gpx.toString());
 ```
 
-### Gpx
+Get more details about usage with the unit tests.
 
-The Gpx JavaScript object.
+### GPX
 
-`constructor(gpxAttr, metadata)` 
+The GPX JavaScript object.
+
+`constructor(object)` 
 
 ```javascript
-let gpx = new Gpx({version: '1.1'}, {name: 'My first hike'})
+const gpx = new Gpx({$:{...}, metadat: {...}, wpt:[{...},{...}]}, trk: {...}, rte: {...})
 ```
 
 #### Member Variables
 
-`gpxAttr` the attributes for the gpx element. Default value:
+`$` the attributes for the gpx element. Default value:
 ```javascript
 {
     'version': '1.1',
@@ -58,41 +62,25 @@ let gpx = new Gpx({version: '1.1'}, {name: 'My first hike'})
 }
 ```
 
-`metadata` the metadata for the gpx. The type of `time` in the metadata should be `Date`.
+`metadata` the metadata for the gpx.
 
-`waypoints` array of waypoints. It is corresponded to `<wpt>`. The type of `time` in a waypoint should be `Date`.
+`wpt` array of waypoints. It is corresponded to `<wpt>`. The type of all elements in `wpt` is `Waypoint`;
 
-`trackSegments` array of track segments. It is corresponded to `<trkseg>`. The type of `time` in a track should be `Date`. Each track segments includes many tracks (`<trkpt>`). As a result, the values should be like as
-```javascript
-[[{trkpt1}, {trkpt2}, ...], [{trkpt3}, {trkpt4}, ...]]
-```
+`rte` array of routes. It is corresponded to `<rte>`. The type of all elements in `rte` is `Route`;
+
+`trk` array of tracks. It is corresponded to `<trk>`. The type of all elements in `trk` is `Track`;
+
+#### Static Methods
+
+`parse(gpxString)` parse gpx string to Gpx object. return `null` if parsing failed.
 
 #### Member Methods
 
-`parse(gpxString)` parse gpx string to Gpx object. return error if parsing failed.
-
-`toString(options)` Gpx object to gpx string. The options is for [node-xml2js](https://github.com/Leonidas-from-XIV/node-xml2js#options-for-the-builder-class).
-
-`addWaypoint(waypoint)` add a waypoint. The method takes care about the waypoint's time.
-
-`addTrack(track, index)` add a track into the `index`-th track segments. The method takes care about the track's time.
+`toString(options)` GPX object to gpx string. The options is for [isomorphic-xml2js](https://github.com/RikkiGibson/isomorphic-xml2js).
 
 ## Save as GPX file in the frontend
 
-You can leverage [FileSaver.js](https://github.com/eligrey/FileSaver.js) to save as GPX file.
-
-```javascript
-import Gpx from 'gpx-parser-builder';
-import FileSaver from 'file-saver';
-
-let gpx = new Gpx();
-// Parse gpx
-gpx.parse('<?xml version="1.0" encoding="utf-8" standalone="no"?> <gpx xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.1" xmlns="http://www.topografix.com/GPX/1/1" creator="Hikingbook" xmlns:gpxhb="https://hikingbook.net/xmlschemas/1/0" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd https://hikingbook.net/xmlschemas/1/0 https://hikingbook.net/xmlschemas/1/0/gpxhb.xsd"> <metadata> <name>2017.4.2 - 2017.4.4 Shuiyang Forest</name> <desc>Hikingbook makes hiking safer. Record your hikes completely and get the information of the hiking routes through the hiking records.</desc> <author> <name>Kfs Phone by Hikingbook</name> <link href="https://hikingbook.net/"> <text>Hikingbook</text> </link> </author> <link href="https://hikingbook.net/"> <text>Hikingbook</text> </link> <time>2017-04-18T21:28:36+08:00</time> <keywords>Hikingbook</keywords> </metadata> <wpt lat="23.6344071105343" lon="120.791769968458"> <ele>1660.7646484375</ele> <time>2017-04-02T15:42:03+08:00</time> <name>01 SunLinkSea Hotel</name> <cmt>2017-04-02T15:42:03+08:00</cmt> <desc>01 SunLinkSea Hotel</desc> <src>Hikingbook</src> <link href="https://hikingbook.net/"> <text>Hikingbook</text> </link> <extensions> <gpxhb:weather>Clear</gpxhb:weather> </extensions> </wpt> <trkseg> <trkpt lat="25.136927" lon="121.602847"> <ele>561</ele> <time>2017-03-27T22:38:18.481Z</time> </trkpt> <trkpt lat="25.136927" lon="121.602847"> <ele>561</ele> <time>2017-03-27T22:38:18.481Z</time> </trkpt> <trkpt lat="25.136927" lon="121.602847"> <ele>561</ele> <time>2017-03-27T22:38:18.481Z</time> </trkpt> </trkseg> <trkseg> <trkpt lat="25.136927" lon="121.602847"> <ele>561</ele> <time>2017-03-27T22:38:18.481Z</time> </trkpt> <trkpt lat="25.136927" lon="121.602847"> <ele>561</ele> <time>2017-03-27T22:38:18.481Z</time> </trkpt> <trkpt lat="25.136927" lon="121.602847"> <ele>561</ele> <time>2017-03-27T22:38:18.481Z</time> </trkpt> </trkseg> </gpx>');
-
-const blob = new Blob([gpx.toString()], {type: 'text/xml;charset=utf-8'});
-FileSaver.saveAs(blob, 'Shuiyang-Forest.gpx');
-
-```
+You can leverage [StreamSaver.js](https://github.com/jimmywarting/StreamSaver.js) or [FileSaver.js](https://github.com/eligrey/FileSaver.js) to save as GPX file. ⚠️Not all borwsers support the above file techniques. ⚠️️️
 
 ## Author
 
