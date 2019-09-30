@@ -2,6 +2,10 @@ import assert from 'assert';
 import fs from 'fs';
 import GPX from '../src/gpx';
 
+if (typeof require !== "undefined") {
+  var DOMParser = require("xmldom").DOMParser;
+}
+
 describe('GPX', function() {
   describe('Parse', function() {
     it('Parse a gpx string', function(done) {
@@ -92,5 +96,42 @@ describe('GPX', function() {
       console.log(gpx.toString());
       done();
     });
+
+    it('Build a gpx string and keep zero lat/lon values', function(done) {
+      const gpx = new GPX({
+        metadata: {
+          name: 'GPX'
+        },
+        wpt: [{$: {
+          lat: 0,
+          lon: 1
+        }, ele: 916, time: '2019-07-01T09:16:00Z', name: 'Waypoint 1', extensions: {
+          'gpx:test': 'Waypoint 1'
+        }}, {$: {
+          lat: 1,
+          lon: 0
+        }, ele: 916, time: '2019-07-01T10:16:00Z', name: 'Waypoint 2', extensions: {
+          'gpx:test': 'Waypoint 2'
+        }}]
+      });
+      console.log(gpx.toString());
+      const result = (new DOMParser()).parseFromString(gpx.toString(), 'text/xml');
+      // assert.equal(result.firstChild.tagName, 'gpx');
+      // expect(result.firstChild.tagName).toEqual('gpx');
+      assert.equal(result.getElementsByTagName('wpt').length, 2);
+      // expect(result.getElementsByTagName('wpt').length).toEqual(2);
+      const wpts = result.getElementsByTagName('wpt');
+      assert.equal(wpts[0].getAttribute('lat'), 0);
+      // expect(wpts[0].getAttribute('lat')).toEqual('0');
+      assert.equal(wpts[0].getAttribute('lon'), 1);
+      // expect(wpts[0].getAttribute('lon')).toEqual('1');
+      assert.equal(wpts[1].getAttribute('lat'), 1);
+      // expect(wpts[1].getAttribute('lat')).toEqual('1');
+      assert.equal(wpts[1].getAttribute('lon'), 0);
+      // expect(wpts[1].getAttribute('lon')).toEqual('0');
+      done();
+    });
   })
 });
+
+
