@@ -116,19 +116,12 @@ describe('GPX', function() {
       });
       console.log(gpx.toString());
       const result = (new DOMParser()).parseFromString(gpx.toString(), 'text/xml');
-      // assert.equal(result.firstChild.tagName, 'gpx');
-      // expect(result.firstChild.tagName).toEqual('gpx');
       assert.equal(result.getElementsByTagName('wpt').length, 2);
-      // expect(result.getElementsByTagName('wpt').length).toEqual(2);
       const wpts = result.getElementsByTagName('wpt');
       assert.equal(wpts[0].getAttribute('lat'), 0);
-      // expect(wpts[0].getAttribute('lat')).toEqual('0');
       assert.equal(wpts[0].getAttribute('lon'), 1);
-      // expect(wpts[0].getAttribute('lon')).toEqual('1');
       assert.equal(wpts[1].getAttribute('lat'), 1);
-      // expect(wpts[1].getAttribute('lat')).toEqual('1');
       assert.equal(wpts[1].getAttribute('lon'), 0);
-      // expect(wpts[1].getAttribute('lon')).toEqual('0');
       done();
     });
   })
