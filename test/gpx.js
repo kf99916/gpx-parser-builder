@@ -2,10 +2,6 @@ import assert from 'assert';
 import fs from 'fs';
 import GPX from '../src/gpx';
 
-if (typeof require !== "undefined") {
-  var DOMParser = require("xmldom").DOMParser;
-}
-
 describe('GPX', function() {
   describe('Parse', function() {
     it('Parse a gpx string', function(done) {
@@ -115,13 +111,17 @@ describe('GPX', function() {
         }}]
       });
       console.log(gpx.toString());
-      const result = (new DOMParser()).parseFromString(gpx.toString(), 'text/xml');
-      assert.equal(result.getElementsByTagName('wpt').length, 2);
-      const wpts = result.getElementsByTagName('wpt');
-      assert.equal(wpts[0].getAttribute('lat'), 0);
-      assert.equal(wpts[0].getAttribute('lon'), 1);
-      assert.equal(wpts[1].getAttribute('lat'), 1);
-      assert.equal(wpts[1].getAttribute('lon'), 0);
+
+      assert.notEqual(gpx, undefined);
+      assert.notEqual(gpx.wpt, undefined);
+      assert.equal(gpx.wpt.length, 2);
+
+      assert.equal(gpx.wpt[0].$.lat, 0);
+      assert.equal(gpx.wpt[0].$.lon, 1);
+
+      assert.equal(gpx.wpt[1].$.lat, 1);
+      assert.equal(gpx.wpt[1].$.lon, 0);
+      
       done();
     });
   })
