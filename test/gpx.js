@@ -92,5 +92,39 @@ describe('GPX', function() {
       console.log(gpx.toString());
       done();
     });
+
+    it('Build a gpx string and keep zero lat/lon values', function(done) {
+      const gpx = new GPX({
+        metadata: {
+          name: 'GPX'
+        },
+        wpt: [{$: {
+          lat: 0,
+          lon: 1
+        }, ele: 916, time: '2019-07-01T09:16:00Z', name: 'Waypoint 1', extensions: {
+          'gpx:test': 'Waypoint 1'
+        }}, {$: {
+          lat: 1,
+          lon: 0
+        }, ele: 916, time: '2019-07-01T10:16:00Z', name: 'Waypoint 2', extensions: {
+          'gpx:test': 'Waypoint 2'
+        }}]
+      });
+      console.log(gpx.toString());
+
+      assert.notEqual(gpx, undefined);
+      assert.notEqual(gpx.wpt, undefined);
+      assert.equal(gpx.wpt.length, 2);
+
+      assert.equal(gpx.wpt[0].$.lat, 0);
+      assert.equal(gpx.wpt[0].$.lon, 1);
+
+      assert.equal(gpx.wpt[1].$.lat, 1);
+      assert.equal(gpx.wpt[1].$.lon, 0);
+      
+      done();
+    });
   })
 });
+
+

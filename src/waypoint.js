@@ -3,8 +3,8 @@ import Link from './link';
 export default class Waypoint {
   constructor(object) {
     this.$ = {};
-    this.$.lat = object.$.lat || object.lat || -1;
-    this.$.lon = object.$.lon || object.lon || -1;
+    this.$.lat = object.$.lat === 0 || object.lat === 0 ? 0 : object.$.lat || object.lat || -1;
+    this.$.lon = object.$.lon === 0 || object.lon === 0 ? 0 : object.$.lon || object.lon || -1;
     this.ele = object.ele;
     this.time = object.time ? new Date(object.time) : new Date();
     this.magvar = object.magvar;
