@@ -209,6 +209,9 @@ Day 2：排雲山莊 〉圓峰山屋叉路 〉風口 〉北峰叉路 〉玉山�
   </trk>
   <rte>
     <name>Kf's Route</name>
+    <link href="https://somesite.com/edwards-cove-road">
+      <text><![CDATA[Some Road]]></text>
+    </link> 
     <rtept lon="9.860624216140083" lat="54.9328621088893">
       <ele>0.0</ele>
       <name>Position 1</name>
