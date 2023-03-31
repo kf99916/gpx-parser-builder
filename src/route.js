@@ -12,7 +12,7 @@ export default class Route {
     this.extensions = object.extensions;
     if (object.link) {
       if (!Array.isArray(object.link)) {
-        this.link = [object.link];
+        object.link = [object.link];
       }
       this.link = object.link.map(l => new Link(l));
     }
