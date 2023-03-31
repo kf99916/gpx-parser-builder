@@ -6,7 +6,9 @@ export default class Waypoint {
     this.$.lat = object.$.lat === 0 || object.lat === 0 ? 0 : object.$.lat || object.lat || -1;
     this.$.lon = object.$.lon === 0 || object.lon === 0 ? 0 : object.$.lon || object.lon || -1;
     this.ele = object.ele;
-    this.time = object.time ? new Date(object.time) : new Date();
+    if (object.time) {
+      this.time = new Date(object.time);
+    }
     this.magvar = object.magvar;
     this.geoidheight = object.geoidheight;
     this.name = object.name;
