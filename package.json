@@ -25,10 +25,10 @@
     "src"
   ],
   "devDependencies": {
-    "@babel/core": "~7.7",
-    "@babel/preset-env": "~7.7",
-    "@babel/register": "~7.7",
-    "mocha": "~6.2"
+    "@babel/core": "~7.21",
+    "@babel/preset-env": "~7.20",
+    "@babel/register": "~7.21",
+    "mocha": "^10.2.0"
   },
   "dependencies": {
     "isomorphic-xml2js": "~0.1"
