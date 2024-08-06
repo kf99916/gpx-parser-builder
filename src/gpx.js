@@ -3,7 +3,7 @@ import Metadata from './metadata';
 import Waypoint from './waypoint';
 import Route from './route';
 import Track from './track';
-import {removeEmpty, allDatesToISOString} from './utils';
+import { removeEmpty, allDatesToISOString } from './utils';
 
 const defaultAttributes = {
   version: '1.1',
@@ -11,12 +11,16 @@ const defaultAttributes = {
   xmlns: 'http://www.topografix.com/GPX/1/1',
   'xmlns:xsi': 'http://www.w3.org/2001/XMLSchema-instance',
   'xsi:schemaLocation':
-      'http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd'
-}
+    'http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd',
+};
 
 export default class GPX {
   constructor(object) {
-    this.$ = Object.assign({}, defaultAttributes, object.$ || object.attributes || {});
+    this.$ = Object.assign(
+      {},
+      defaultAttributes,
+      object.$ || object.attributes || {}
+    );
     this.extensions = object.extensions;
 
     if (object.metadata) {
@@ -26,44 +30,48 @@ export default class GPX {
       if (!Array.isArray(object.wpt)) {
         object.wpt = [object.wpt];
       }
-      this.wpt = object.wpt.map(wpt => new Waypoint(wpt));
+      this.wpt = object.wpt.map((wpt) => new Waypoint(wpt));
     }
     if (object.rte) {
       if (!Array.isArray(object.rte)) {
         object.rte = [object.rte];
       }
-      this.rte = object.rte.map(rte => new Route(rte));
+      this.rte = object.rte.map((rte) => new Route(rte));
     }
     if (object.trk) {
       if (!Array.isArray(object.trk)) {
         object.trk = [object.trk];
       }
-      this.trk = object.trk.map(trk => new Track(trk));
+      this.trk = object.trk.map((trk) => new Track(trk));
     }
 
     removeEmpty(this);
   }
-  
+
   static parse(gpxString) {
     let gpx;
-    xml2js.parseString(gpxString, {
-      explicitArray: false
-    }, (err, xml) => {
-      if (err) {
-        return;
-      }
-      if (!xml.gpx) {
-        return;
-      }
+    xml2js.parseString(
+      gpxString,
+      {
+        explicitArray: false,
+      },
+      (err, xml) => {
+        if (err) {
+          return;
+        }
+        if (!xml.gpx) {
+          return;
+        }
 
-      gpx = new GPX({
-        attributes: xml.gpx.$,
-        metadata: xml.gpx.metadata,
-        wpt: xml.gpx.wpt,
-        rte: xml.gpx.rte,
-        trk: xml.gpx.trk
-      });
-    });
+        gpx = new GPX({
+          attributes: xml.gpx.$,
+          metadata: xml.gpx.metadata,
+          wpt: xml.gpx.wpt,
+          rte: xml.gpx.rte,
+          trk: xml.gpx.trk,
+        });
+      }
+    );
 
     return gpx;
   }
@@ -72,8 +80,9 @@ export default class GPX {
     options = options || {};
     options.rootName = 'gpx';
 
-    const builder = new xml2js.Builder(options), gpx = new GPX(this);
+    const builder = new xml2js.Builder(options),
+      gpx = new GPX(this);
     allDatesToISOString(gpx);
-    return builder.buildObject(gpx);
+    return builder.buildObject(gpx).replaceAll(`xmlns=""`, '');
   }
 }
