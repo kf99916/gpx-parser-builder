@@ -1,9 +1,9 @@
 import * as xml2js from 'isomorphic-xml2js';
-import Metadata from './metadata';
-import Waypoint from './waypoint';
-import Route from './route';
-import Track from './track';
-import { removeEmpty, allDatesToISOString } from './utils';
+import Metadata from './metadata.js';
+import Waypoint from './waypoint.js';
+import Route from './route.js';
+import Track from './track.js';
+import { removeEmpty, allDatesToISOString } from './utils.js';
 
 const defaultAttributes = {
   version: '1.1',
