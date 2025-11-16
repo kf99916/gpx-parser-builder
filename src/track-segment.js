@@ -1,4 +1,4 @@
-import Waypoint from './waypoint';
+import Waypoint from './waypoint.js';
 
 export default class TrackSegment {
   constructor(object) {

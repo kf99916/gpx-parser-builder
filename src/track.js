@@ -1,5 +1,5 @@
-import TrackSegment from './track-segment';
-import Link from './link';
+import TrackSegment from './track-segment.js';
+import Link from './link.js';
 
 export default class Track {
   constructor(object) {

@@ -1,7 +1,7 @@
-import Copyright from './copyright';
-import Link from './link';
-import Person from './person';
-import Bounds from './bounds';
+import Copyright from './copyright.js';
+import Link from './link.js';
+import Person from './person.js';
+import Bounds from './bounds.js';
 
 export default class Metadata {
   constructor(object) {
