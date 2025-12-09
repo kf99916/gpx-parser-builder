@@ -6,13 +6,18 @@ import Track from './track.js';
 import { removeEmpty, allDatesToISOString } from './utils.js';
 
 const defaultAttributes = {
-  version: '1.1',
-  creator: 'gpx-parser-builder',
-  xmlns: 'http://www.topografix.com/GPX/1/1',
-  'xmlns:xsi': 'http://www.w3.org/2001/XMLSchema-instance',
-  'xsi:schemaLocation':
-    'http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd',
-};
+    version: '1.1',
+    creator: 'gpx-parser-builder',
+    xmlns: 'http://www.topografix.com/GPX/1/1',
+    'xmlns:xsi': 'http://www.w3.org/2001/XMLSchema-instance',
+    'xsi:schemaLocation':
+      'http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd',
+  },
+  defaultOptions = {
+    ignoreAttributes: false,
+    attributesGroupName: '$',
+    attributeNamePrefix: '',
+  };
 
 export default class GPX {
   constructor(object) {
@@ -48,12 +53,9 @@ export default class GPX {
     removeEmpty(this);
   }
 
-  static parse(gpxString) {
-    const parser = new XMLParser({
-        ignoreAttributes: false,
-        attributesGroupName: '$',
-        attributeNamePrefix: '',
-      }),
+  static parse(gpxString, options) {
+    options = Object.assign(defaultOptions, options);
+    const parser = new XMLParser(options),
       xml = parser.parse(gpxString);
 
     return new GPX({
@@ -66,14 +68,7 @@ export default class GPX {
   }
 
   toString(options) {
-    options = Object.assign(
-      {
-        ignoreAttributes: false,
-        attributesGroupName: '$',
-        attributeNamePrefix: '',
-      },
-      options
-    );
+    options = Object.assign(defaultOptions, options);
 
     const builder = new XMLBuilder(options),
       gpx = new GPX(this);
