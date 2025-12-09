@@ -1,4 +1,4 @@
-import * as xml2js from 'isomorphic-xml2js';
+import { XMLParser, XMLBuilder } from 'fast-xml-parser';
 import Metadata from './metadata.js';
 import Waypoint from './waypoint.js';
 import Route from './route.js';
@@ -49,40 +49,35 @@ export default class GPX {
   }
 
   static parse(gpxString) {
-    let gpx;
-    xml2js.parseString(
-      gpxString,
-      {
-        explicitArray: false,
-      },
-      (err, xml) => {
-        if (err) {
-          return;
-        }
-        if (!xml.gpx) {
-          return;
-        }
+    const parser = new XMLParser({
+        ignoreAttributes: false,
+        attributesGroupName: '$',
+        attributeNamePrefix: '',
+      }),
+      xml = parser.parse(gpxString);
 
-        gpx = new GPX({
-          attributes: xml.gpx.$,
-          metadata: xml.gpx.metadata,
-          wpt: xml.gpx.wpt,
-          rte: xml.gpx.rte,
-          trk: xml.gpx.trk,
-        });
-      }
-    );
-
-    return gpx;
+    return new GPX({
+      attributes: xml.gpx.$,
+      metadata: xml.gpx.metadata,
+      wpt: xml.gpx.wpt,
+      rte: xml.gpx.rte,
+      trk: xml.gpx.trk,
+    });
   }
 
   toString(options) {
-    options = options || {};
-    options.rootName = 'gpx';
+    options = Object.assign(
+      {
+        ignoreAttributes: false,
+        attributesGroupName: '$',
+        attributeNamePrefix: '',
+      },
+      options
+    );
 
-    const builder = new xml2js.Builder(options),
+    const builder = new XMLBuilder(options),
       gpx = new GPX(this);
     allDatesToISOString(gpx);
-    return builder.buildObject(gpx).replaceAll(`xmlns=""`, '');
+    return builder.build({ gpx: gpx }).replaceAll(`xmlns=""`, '');
   }
 }

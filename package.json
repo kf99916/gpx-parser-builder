@@ -4,7 +4,7 @@
   "description": "A simple gpx parser and builder between GPX string and JavaScript object",
   "main": "./src/gpx.js",
   "scripts": {
-    "test": "mocha --require @babel/register test/**/*.js"
+    "test": "mocha test/**/*.js"
   },
   "repository": {
     "type": "git",
@@ -25,12 +25,9 @@
     "src"
   ],
   "devDependencies": {
-    "@babel/core": "~7.21",
-    "@babel/preset-env": "~7.20",
-    "@babel/register": "~7.21",
-    "mocha": "^10.2.0"
+    "mocha": "^11.7.5"
   },
   "dependencies": {
-    "isomorphic-xml2js": "~0.1"
+    "fast-xml-parser": "^5.3.2"
   }
 }

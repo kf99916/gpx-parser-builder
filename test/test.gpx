@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<gpx version="1.1" creator="Hikingbook" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.topografix.com/GPX/1/1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd https://hikingbook.net/xmlschemas/1/1 https://hikingbook.net/xmlschemas/1/1/gpxhb.xsd" xmlns:gpxhb="https://hikingbook.net/xmlschemas/1/1">
+<?xml-stylesheet type="text/xsl" href="details.xsl"?>
+<gpx version="1.1" creator="Hikingbook" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://www.topografix.com/GPX/1/1"
+  xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd
+                      https://hikingbook.net/xmlschemas/1/1 https://hikingbook.net/xmlschemas/1/1/gpxhb.xsd"
+  xmlns:gpxhb="https://hikingbook.net/xmlschemas/1/1">
   <metadata>
     <name>2018.12.02 - 2018.12.03 玉山前二峰：主峰與前峰</name>
     <desc>Day 1：塔塔加登山口 〉孟祿亭 〉前峰叉路 〉玉山前峰 〉前峰叉路 〉白木林涼亭 〉大峭壁 〉排雲山莊
@@ -211,7 +216,7 @@ Day 2：排雲山莊 〉圓峰山屋叉路 〉風口 〉北峰叉路 〉玉山�
     <name>Kf's Route</name>
     <link href="https://somesite.com/edwards-cove-road">
       <text><![CDATA[Some Road]]></text>
-    </link> 
+    </link>
     <rtept lon="9.860624216140083" lat="54.9328621088893">
       <ele>0.0</ele>
       <name>Position 1</name>
