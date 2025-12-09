@@ -1,5 +1,6 @@
 # gpx-parser-builder
-A simple gpx parser and builder between GPX string and JavaScript object. It is dependent on [isomorphic-xml2js](https://github.com/RikkiGibson/isomorphic-xml2js).
+
+A simple gpx parser and builder between GPX string and JavaScript object. It is dependent on [fast-xml-parser](https://github.com/NaturalIntelligence/fast-xml-parser).
 
 [![npm](https://img.shields.io/npm/dt/gpx-parser-builder.svg)](https://www.npmjs.com/package/gpx-parser-builder)
 [![GitHub stars](https://img.shields.io/github/stars/kf99916/gpx-parser-builder.svg)](https://github.com/kf99916/gpx-parser-builder/stargazers)
@@ -9,17 +10,13 @@ A simple gpx parser and builder between GPX string and JavaScript object. It is 
 
 ## Requirements
 
-gpx-parser-builder is written with ECMAScript 6. You can leverage [Babel](https://babeljs.io/) and [Webpack](https://webpack.js.org/) to make all browsers available.
+gpx-parser-builder is written with ECMAScript 6 and is now an ES Module.
 
 ## Installation
 
 ```bash
 npm install gpx-parser-builder --save
 ```
-
-## Version
-
-v1.0.0+ is a breaking change for v0.2.2-. v1.0.0+ fully supports gpx files including waypoints, routes, and tracks. Every gpx type is 1-1 corresponding to a JavaScript class.
 
 ## Usage
 
@@ -43,7 +40,7 @@ Get more details about usage with the unit tests.
 
 The GPX JavaScript object.
 
-`constructor(object)` 
+`constructor(object)`
 
 ```javascript
 const gpx = new Gpx({$:{...}, metadat: {...}, wpt:[{...},{...}]}, trk: {...}, rte: {...})
@@ -52,6 +49,7 @@ const gpx = new Gpx({$:{...}, metadat: {...}, wpt:[{...},{...}]}, trk: {...}, rt
 #### Member Variables
 
 `$` the attributes for the gpx element. Default value:
+
 ```javascript
 {
     'version': '1.1',
@@ -72,11 +70,11 @@ const gpx = new Gpx({$:{...}, metadat: {...}, wpt:[{...},{...}]}, trk: {...}, rt
 
 #### Static Methods
 
-`parse(gpxString)` parse gpx string to Gpx object. return `null` if parsing failed.
+`parse(gpxString, options)` parse gpx string to Gpx object. return `null` if parsing failed. The options is for [fast-xml-parser's XMLParser](https://github.com/NaturalIntelligence/fast-xml-parser/blob/master/docs/v4/2.XMLparseOptions.md).
 
 #### Member Methods
 
-`toString(options)` GPX object to gpx string. The options is for [isomorphic-xml2js](https://github.com/RikkiGibson/isomorphic-xml2js).
+`toString(options)` GPX object to gpx string. The options is for [fast-xml-parser's XMLBuilder](https://github.com/NaturalIntelligence/fast-xml-parser/blob/master/docs/v4/3.XMLBuilder.md).
 
 ## Save as GPX file in the frontend
 
@@ -84,7 +82,7 @@ You can leverage [StreamSaver.js](https://github.com/jimmywarting/StreamSaver.js
 
 ## Author
 
-Zheng-Xiang Ke, kf99916@gmail.com
+Ke Zheng-Xiang, kf99916@gmail.com
 
 ## License
 
